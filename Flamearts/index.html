@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flamearts - Em Manutenção</title>
+  
+  <!-- Favicon PNG -->
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  
+  <!-- Link para o CSS externo -->
+  <link rel="stylesheet" href="styles/style.css">
+  
+  <meta name="description" content="Flamearts - Em manutenção, voltamos em breve.">
+</head>
+<body>
+  <!-- Vídeo de fundo -->
+  <video id="background-video" autoplay muted playsinline class="background-video" preload="auto">
+    <!-- A fonte será definida via JavaScript -->
+  </video>
+  <div class="overlay"></div>
+  
+  <header>
+    <!-- Logo centralizado e com tamanho aumentado -->
+    <img src="assets/logo.png" alt="Flamearts Logo" class="logo">
+  </header>
+  
+  <div class="content">
+    <h1>Em Manutenção</h1>
+    <p>Voltamos em breve.</p>
+    <a class="contact" href="mailto:contacto@flamearts.ao">Mais informações: contacto@flamearts.ao</a>
+    <div class="loader"></div>
+  </div>
+  
+  <!-- Script para carregar os vídeos com transição suave -->
+  <script>
+    const videoFolderPath = "assets/video/";
+    const videoFileNames = [
+      "vinheta_flame_arts.mp4",
+      "vinheta_flame_arts_2.mp4",
+      "vinheta_flame_arts_3.mp4"
+    ];
+    
+    let currentVideoIndex = 0;
+    const videoElement = document.getElementById("background-video");
+    // Define a transição de opacidade (fade) no elemento de vídeo
+    videoElement.style.transition = "opacity 1s ease";
+    
+    // Função para tocar o próximo vídeo com efeito de fade
+    function playNextVideo() {
+      // Se nenhum vídeo foi carregado ainda (primeira execução), carrega imediatamente
+      if (!videoElement.src) {
+        videoElement.src = videoFolderPath + videoFileNames[currentVideoIndex];
+        videoElement.load();
+        videoElement.play().catch(err => console.error("Erro ao reproduzir o vídeo:", err));
+        currentVideoIndex = (currentVideoIndex + 1) % videoFileNames.length;
+        return;
+      }
+      
+      // Fade out: reduz opacidade para 0
+      videoElement.style.opacity = 0;
+      
+      // Após 1 segundo (tempo da transição), troca o vídeo e faz fade in
+      setTimeout(() => {
+        videoElement.src = videoFolderPath + videoFileNames[currentVideoIndex];
+        videoElement.load();
+        videoElement.play().catch(err => console.error("Erro ao reproduzir o vídeo:", err));
+        currentVideoIndex = (currentVideoIndex + 1) % videoFileNames.length;
+        // Fade in: volta a opacidade para 1
+        videoElement.style.opacity = 1;
+      }, 1000);
+    }
+    
+    // Ao terminar o vídeo, chama a função para trocar com transição suave
+    videoElement.addEventListener("ended", playNextVideo);
+    // Em caso de erro, tenta o próximo vídeo
+    videoElement.addEventListener("error", (e) => {
+      console.error("Erro no vídeo:", e);
+      playNextVideo();
+    });
+    
+    // Inicia o primeiro vídeo
+    playNextVideo();
+  </script>
+</body>
+</html>

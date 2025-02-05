@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  background-color: #000; /* Fundo preto garantido */
+}
+
+/* Vídeo de fundo em tela cheia com transição para fade */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Camada escura */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: -1;
+}
+
+/* Cabeçalho com logo centralizado */
+header {
+  padding: 20px 0;
+}
+
+.logo {
+  width: 375px; /* Logo aumentado */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Container de conteúdo: centraliza os elementos abaixo do header */
+.content {
+  margin-top: 20px;
+  z-index: 1;
+}
+
+/* Animação de hover para textos e botão */
+h1, p, .contact {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+h1:hover, p:hover, .contact:hover {
+  transform: scale(1.1);
+  color: #f0f0f0; /* Leve alteração na tonalidade */
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.contact {
+  font-size: 1.2rem;
+  background-color: #ff9800;
+  color: #121212;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.contact:hover {
+  background-color: #ffa726;
+}
+
+/* Loader centralizado */
+.loader {
+  margin: 20px auto;
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top: 5px solid #ff9800;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
